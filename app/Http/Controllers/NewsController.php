@@ -185,4 +185,24 @@ class NewsController extends Controller
         ];
         return response()->json($response,200);
     }
+
+    public function search(Request $request){
+        $data = $request->input('judul_berita');
+        $news = News::where('judul_berita','like',"%{$data}%")->get();
+
+        if(count($news)<=0){
+            return response()->json([
+                'msg'=>'data not found',
+                'code' => 404,
+                'status' => 'error'
+            ],404);
+        }
+
+            return response()->json([
+                'msg'=>'we found it',
+                'code' => 200,
+                'status' => 'succes',
+                'data' => $news
+            ],200);
+    }
 }

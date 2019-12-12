@@ -24,4 +24,5 @@ Route::prefix('v1')->group(function(){
     Route::resource('news','NewsController',[
         'except' => ['create','edit']
     ]);
+    Route::post('search','NewsController@search');
    });
